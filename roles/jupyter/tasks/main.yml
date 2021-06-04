@@ -1,0 +1,28 @@
+---
+- name: Create jupyter compose dir
+  file:
+    path: '{{ jupyter_dir }}'
+    state: directory
+    mode: '0755'
+
+- name: upload compose file
+  template:
+    src: 'docker-compose.yml'
+    dest: '{{ jupyter_docker_compose }}'
+    mode: '0755'
+
+- name: upload web image files
+  copy:
+    src: '{{ role_path }}/files/jupyter'
+    dest: '{{ jupyter_dir }}'
+    mode: '0755'
+
+- name: Update jupyter
+  command:
+    cmd: docker-compose build --pull
+    chdir: '{{ jupyter_dir }}'
+
+- name: Start jupyter
+  command:
+    cmd: docker-compose up -d --build
+    chdir: '{{ jupyter_dir }}'

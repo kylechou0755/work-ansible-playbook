@@ -1,0 +1,10 @@
+---
+# common settings
+- include_tasks: common.yml
+
+# system base settings
+- include_tasks: centos.yml
+  when: ansible_distribution in [ 'CentOS','OracleLinux','RedHat' ]
+
+- include_tasks: debian.yml
+  when: ansible_distribution in [ 'Ubuntu','Debian' ]

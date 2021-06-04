@@ -1,0 +1,4 @@
+---
+ansible_become: true
+jupyter_dir: '/opt/jupyter'
+jupyter_docker_compose: '/opt/jupyter/docker-compose.yml'

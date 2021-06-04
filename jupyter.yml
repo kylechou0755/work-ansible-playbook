@@ -1,0 +1,6 @@
+---
+- hosts: jupyter_server
+  roles:
+    - prepare
+    - docker
+    - jupyter

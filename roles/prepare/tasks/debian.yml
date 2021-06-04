@@ -1,0 +1,28 @@
+---
+- name: Install apt base packages
+  apt:
+    name: '{{ item }}'
+    state: present
+  loop:
+    - htop
+    - iotop
+    - net-tools
+    - git
+    - curl
+    - apt-transport-https
+    - sysstat
+
+- name: uninstall snap
+  apt:
+    name: '{{ item }}'
+    state: absent
+    purge: yes
+  loop:
+    - snap
+    - snapd
+
+- name: Restart cron for time zone
+  service:
+    name: cron
+    state: restarted
+    enabled: yes
